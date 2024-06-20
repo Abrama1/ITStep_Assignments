@@ -1,0 +1,19 @@
+{% extends 'books/base.html' %}
+
+{% block title %}All Books{% endblock %}
+
+{% block content %}
+    <h1 class="my-4">All Books</h1>
+    <a class="btn btn-primary mb-3" href="{% url 'add_book' %}">Add New Book</a>
+    <ul class="list-group">
+        {% for book in books %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="{% url 'book_detail' book.id %}">{{ book.title }}</a>
+                <div>
+                    <a class="btn btn-warning btn-sm" href="{% url 'edit_book' book.id %}">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'delete_book' book.id %}">Delete</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

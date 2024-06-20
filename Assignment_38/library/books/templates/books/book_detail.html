@@ -1,0 +1,13 @@
+{% extends 'books/base.html' %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block content %}
+    <h1 class="my-4">{{ book.title }}</h1>
+    <p><strong>Author:</strong> {{ book.author }}</p>
+    <p><strong>Description:</strong> {{ book.description }}</p>
+    <p><strong>Published Date:</strong> {{ book.published_date }}</p>
+    <a class="btn btn-warning" href="{% url 'edit_book' book.id %}">Edit</a>
+    <a class="btn btn-danger" href="{% url 'delete_book' book.id %}">Delete</a>
+    <a class="btn btn-secondary mt-3" href="{% url 'all_books' %}">Back to all books</a>
+{% endblock %}
