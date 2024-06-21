@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %} My Events {% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>My Events: </h1>
+    <div class="row mt-3">
+        {% for event in events %}
+
+        <div class="col-md-4 mb-4">
+            <div class="card" style="width: 18rem">
+                <img src="https://images.squarespace-cdn.com/content/v1/5dfc6153e5cf6f15c4b4c6a0/1579243089356-VBXN7YMWWYOZQ1EDAJ62/metallica.jpeg"
+                    class="card-img-top" alt="..." />
+                <div class="card-body">
+                    <h5 class="card-title">{{event.title}}</h5>
+                    <p class="card-text" style="height: 180px">
+                        {{event.description|slice:":200"}}...
+                        <a href="{% url 'mainapp:event_details' event.id %}">Continue Reading</a>
+                    </p>
+                    <p class="card-text"><strong>Date:</strong> {{event.date}}</p>
+                    <p class="card-text"><strong>Location:</strong> <a class="text-decoration-none"
+                            href="#">{{event.location}}</a> </p>
+
+                    <p class="card-text">
+                        <strong> Category: </strong>
+
+                        {% for category in event.category.all %}
+                        <span class="badge text-bg-secondary"> {{ category.name }} </span>
+                        {% endfor %}
+                    </p>
+
+                    <a href="{% url 'mainapp:event_details' event.id %}" class="btn btn-primary"
+                        style="width: 100%; margin-bottom: 10px;">Go To {{event.title}} </a>
+                    <div class="d-flex justify-content-between">
+                        {% if user.is_authenticated %}
+                        {% if user in event.user.all %}
+                        <a href="{% url 'mainapp:unparticipate' event.id %}"
+                            class="btn btn-secondary ">Unparticipate</a>
+                        {% else %}
+                        <a href="{% url 'mainapp:participate' event.id %}" class="btn btn-success ">Participate</a>
+                        {% endif %}
+                        {% endif %}
+                        {% if user.is_authenticated and perms.mainapp.delete_event %}
+                        <a href="{% url 'mainapp:delete_event' event.id %}" class="btn btn-danger"
+                            onclick="return confirm('Are you sure you want to delete event?');">Delete Event</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

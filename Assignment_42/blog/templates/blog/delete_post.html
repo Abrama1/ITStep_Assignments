@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} Delete Post {% endblock %}
+
+{% block body %}
+    <h1>Delete Post</h1>
+    <p>Are you sure you want to delete "{{ post.title }}"?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit">Confirm</button>
+        <a href="{{ go_back_url }}" class="btn btn-primary">Go Back</a>
+    </form>
+{% endblock %}

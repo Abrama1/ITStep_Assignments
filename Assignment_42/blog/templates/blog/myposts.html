@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} My Posts {% endblock %}
+
+{% block body %}
+    <h1>My Posts</h1>
+            <div class="d-flex mb-4">
+                <a href="{% url 'add_post' %}" class="btn btn-success" style="margin-right: 30px;">Add New Post</a>
+                <a class="btn btn-primary" href="{% url 'index' %}">Main Page</a>
+            </div>
+    {% for post in myposts %}
+        <div class="col-md-8">
+            <article class="media content-section">
+                <div class="media-body">
+                <h2><a class="article-title" href="{% url 'post_info' post.id %}">{{ post.title }}</a></h2>
+                <p class="article-content">{{ post.content|slice:":100"}}...<a href="{% url 'post_info' post.id %}">Continue Reading</a></p>
+                </div>
+                <a class="btn btn-secondary" href="{% url 'edit_post' post.id %}">Edit Post</a>
+                <a class="btn btn-danger" href="{% url 'delete_post' post.id %}">Delete Post</a>
+            </article>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+
+

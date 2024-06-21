@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Add Attendee to {{ event.title }}{% endblock %}
+{% block body %}
+<div class="container">
+    <h2 class="mb-4">Add New Attendee to {{ event }}</h2>
+    <form method="post" class="w-50">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="mb-3">
+            <button type="submit" class="btn btn-success">Add Attendee</button>
+            <a href="{% url 'mainapp:event_details' event.id %}" class="btn btn-primary ms-2">Go Back</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ post_info }} {% endblock %}
+
+{% block body %}
+    {% if user.is_authenticated and perms.blog.view_post %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <small>Author:</small>
+                    <a class="mr-2" style="text-decoration: none;" href="#">{{ post_info.author }},</a>
+                    <small class="text-muted">Posted: {{ post_info.date_posted|date:"F d, Y"}}</small>
+                </div>
+                <h2 style="text-align: center;">{{ post_info.title }}</h2>
+                <p class="article-content">{{ post_info.content }}</p>
+            </div>
+        </article>
+        <a class="btn btn-primary" href="{{ go_back_url }}">Go Back</a>
+    {% endif %}
+{% endblock %}

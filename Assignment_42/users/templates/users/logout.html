@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %} Log Out {% endblock %}
+
+{% block body %}
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="nav-item nav-link">Logout</button>
+    </form>
+{% endblock %}
